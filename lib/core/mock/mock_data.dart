@@ -69,7 +69,18 @@ class MockData {
           'https://shopee.vn',
           'https://www.tiktok.com/shop',
         ),
+        (
+          5,
+          'Khăn bandana họa tiết',
+          'Khăn cotton vuông 55 cm, ngừng bán theo mùa.',
+          [(501, 'KB-HOATIET-DO', 'Đỏ', 59000)],
+          'https://shopee.vn',
+          null,
+        ),
       ];
+
+  /// Sản phẩm đang ẩn (status HIDDEN).
+  static const hiddenProductIds = {5};
 
   /// skuId -> (tồn thực tế, đang giữ chỗ)
   static final inventory = <int, (int, int)>{
@@ -82,6 +93,7 @@ class MockData {
     301: (60, 5),
     401: (12, 0),
     402: (2, 0),
+    501: (7, 0),
   };
 
   // ---------------------------------------------------------------- Đơn hàng
@@ -103,6 +115,52 @@ class MockData {
           name: 'Áo thun cotton basic - Trắng / M',
           quantity: 2,
           unitPrice: 159000,
+        ),
+      ],
+    ),
+    Order(
+      id: 1006,
+      platform: Platform.tiktokShop,
+      platformOrderId: '5779223344556677',
+      status: OrderStatus.pending,
+      totalAmount: 457000,
+      customerName: 'Võ Thị F',
+      customerPhone: '093****789',
+      shippingAddress: 'Hải Châu, Đà Nẵng',
+      source: OrderSource.webhook,
+      createdAt: daysAgo(0, hours: 2),
+      items: const [
+        OrderItem(
+          skuCode: 'TT-CANVAS-KEM',
+          name: 'Túi tote canvas - Kem',
+          quantity: 1,
+          unitPrice: 139000,
+        ),
+        OrderItem(
+          skuCode: 'AT-BASIC-DEN-L',
+          name: 'Áo thun cotton basic - Đen / L',
+          quantity: 2,
+          unitPrice: 159000,
+        ),
+      ],
+    ),
+    Order(
+      id: 1007,
+      platform: Platform.shopee,
+      platformOrderId: '241014IJKL56',
+      status: OrderStatus.pending,
+      totalAmount: 389000,
+      customerName: 'Đặng G',
+      customerPhone: '097****321',
+      shippingAddress: 'Ninh Kiều, Cần Thơ',
+      source: OrderSource.polling,
+      createdAt: daysAgo(0, hours: 3),
+      items: const [
+        OrderItem(
+          skuCode: 'QJ-SLIM-31',
+          name: 'Quần jean slim fit - Size 31',
+          quantity: 1,
+          unitPrice: 389000,
         ),
       ],
     ),

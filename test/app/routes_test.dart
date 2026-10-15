@@ -21,6 +21,7 @@ void main() {
       expect(resolveRedirect(s, Routes.customerShop), Routes.login);
       expect(resolveRedirect(s, Routes.login), isNull);
       expect(resolveRedirect(s, Routes.forgotPassword), isNull);
+      expect(resolveRedirect(s, Routes.resetPassword), isNull);
     });
 
     test('đăng nhập xong vào trang chủ theo role', () {
@@ -57,6 +58,19 @@ void main() {
       expect(
         resolveRedirect(_as(UserRole.tenantAdmin), Routes.merchantMarketplace),
         isNull,
+      );
+    });
+
+    test('route /dev/ chỉ vào được ở bản dev', () {
+      const s = Unauthenticated();
+      expect(
+        resolveRedirect(s, Routes.devGallery, allowDevRoutes: true),
+        isNull,
+      );
+      expect(resolveRedirect(s, Routes.devGallery), Routes.login);
+      expect(
+        resolveRedirect(_as(UserRole.staff), Routes.devGallery),
+        Routes.merchantDashboard,
       );
     });
   });
